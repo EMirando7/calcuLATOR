@@ -1,0 +1,24 @@
+
+html {
+    background-color: black;
+}
+#container {
+    display: grid;
+    grid-template-columns: repeat(4, 90px);
+    grid-auto-rows: 45px;
+}
+
+#container > div{
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #ffd8a8;
+    color: #d9480f;
+}
+
+.cell17 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+

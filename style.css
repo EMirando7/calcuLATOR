@@ -1,7 +1,4 @@
 
-html {
-    background-color: black;
-}
 #container {
     display: grid;
     grid-template-columns: repeat(4, 90px);
@@ -9,10 +6,11 @@ html {
 }
 
 #container > div{
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 5px;
     background-color: #ffd8a8;
-    color: #d9480f;
+    color: black;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .cell17 {
@@ -21,4 +19,36 @@ html {
     grid-row-start: 5;
     grid-row-end: 6;
 }
+#container>div{
+    background-color:lightgray;
+    display: flex;
+    justify-content: center;
+    align-items:center ; 
+}
 
+
+.orangeC {
+    background-color: orange !important
+}
+
+.inputCell {
+    border: 2px solid white;
+    border-radius: 5px;
+    color: black;
+    height: 45px;
+    width: 357px;
+    outline: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: large;
+    display: flex;
+    text-align: right;
+}
+
+/* remove spinner from input field */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

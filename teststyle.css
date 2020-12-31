@@ -1,0 +1,51 @@
+input::placeholder{
+    color: white
+}
+
+.cell {
+    border: medium solid white;
+    background-color: gray;
+    border: solid 0.2px black;
+    color: white;
+  }
+  #container {
+    display: grid;
+    grid-template-columns: repeat(4, 67.6px);
+    grid-auto-rows: 40px;
+
+  }
+  #container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+  }
+  
+  .arithmetic {
+    background-color: orange;
+  }
+  
+  #inputField {
+    font-family: 'Roboto', sans-serif;
+    width: 266px;
+    height:80px;
+    border: none;
+    text-align: right;
+    outline: none;
+    background-color: black;
+    color: white;
+    font-size: 55px;
+  }
+  #inputSoFar{
+    position: relative;
+    text-align: right;
+    width: 270px;
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+  .cell0 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }

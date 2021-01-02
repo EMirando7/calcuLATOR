@@ -10,7 +10,7 @@ input::placeholder{
   }
   #container {
     display: grid;
-    grid-template-columns: repeat(4, 67.6px);
+    grid-template-columns: repeat(4, 75px/*67.6px*/);
     grid-auto-rows: 40px;
 
   }
@@ -28,19 +28,19 @@ input::placeholder{
   
   #inputField {
     font-family: 'Roboto', sans-serif;
-    width: 266px;
+    width: 296px;
     height:80px;
     border: none;
     text-align: right;
     outline: none;
     background-color: black;
     color: white;
-    font-size: 55px;
+    font-size: 53px;
   }
   #inputSoFar{
     position: relative;
     text-align: right;
-    width: 270px;
+    width: 300px;
     background-color: black;
     color: white;
     font-family: 'Roboto', sans-serif;

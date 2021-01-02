@@ -17,19 +17,20 @@ function addCellNumClasses() {
 }
 function workingNumberCells () {
     document.addEventListener('click', function(e){
-    clearInputACBtn();
-    if(input.value.length <= 8){
-        if(e.target.classList.contains('number') && !e.target.classList.contains('dot') && !e.target.classList.contains('cell0')){
-            input.value += e.target.textContent
+        clearInputACBtn();
+        if(input.value.length <= 8){
+            if(e.target.classList.contains('dot') && input.value =='') input.value = '0.'   
+            if(e.target.classList.contains('number') && !e.target.classList.contains('dot') && !e.target.classList.contains('cell0')){
+                input.value += e.target.textContent
+            }
+            if(e.target.classList.contains('dot') && !input.value.includes('.')){
+                input.value += e.target.textContent
+            }
+            if(e.target.classList.contains('cell0') && !input.value[0] == '0'){
+                input.value += e.target.textContent
+            } 
         }
-        if(e.target.classList.contains('dot') && !input.value.includes('.')){
-            input.value += e.target.textContent
-        }
-        if(e.target.classList.contains('cell0') && !input.value[0] == '0'){
-            input.value += e.target.textContent
-        }
-    }
-    removeHyph();
+        removeHyph();
     }, false)
 }
 function removeHyph(){
@@ -55,6 +56,18 @@ function plusOrMinus(){
         }
     }, false)
 }
+function shortenNum (){
+    let numToShorten = +input.value
+    if(input.value.length > 8 && input.value.indexOf('-') == 0){
+        input.value = numToShorten.toFixed(6);
+        return;
+    }
+    if(input.value.length > 8){
+        input.value = numToShorten.toFixed(0);
+    }else {
+        return numToShorten.toFixed(8)
+    }
+}
 function Division(){
     let firstNum = '';
     let secondNum = '';
@@ -67,10 +80,12 @@ function Division(){
     }
     container.children[3].addEventListener('click', divisionEventListenerFunc, false)
     container.children[18].addEventListener('click', () => {
+        debugger;
         if(inputSoFarSelector.innerHTML.includes('*') || inputSoFarSelector.innerHTML.includes('-') || inputSoFarSelector.innerHTML.includes('+')){
             if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && !inputSoFarSelector.innerHTML.includes('*')&& !inputSoFarSelector.innerHTML.includes('-')){
                 secondNum = +input.value;
                 input.value = (firstNum / secondNum);
+                shortenNum()
                 return
             }
             else if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && !inputSoFarSelector.innerHTML.includes('*')){
@@ -78,10 +93,12 @@ function Division(){
                 else if(inputSoFarSelector.innerHTML.includes('/')){
                     secondNum = +input.value;
                     input.value = (firstNum / secondNum);
+                    shortenNum()
                     return;
                 }
                 secondNum = +input.value;
                 input.value = (firstNum / secondNum)
+                shortenNum()
                 return;
             }
             else{
@@ -91,6 +108,7 @@ function Division(){
         inputSoFarSelector.innerHTML += ' ' + input.value;
         secondNum = +input.value;
         input.value = (firstNum / secondNum)
+        shortenNum()
     }, false)
 }
 function Multiply(){
@@ -105,17 +123,17 @@ function Multiply(){
     }
     container.children[7].addEventListener('click', multiplyEventListenerFunc, false)
     container.children[18].addEventListener('click', () =>{
-        //takes out control of function if there was a previously used armithemic 
         if(inputSoFarSelector.innerHTML.includes('/') || inputSoFarSelector.innerHTML.includes('-') ||inputSoFarSelector.innerHTML.includes('+')){
             if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && !inputSoFarSelector.innerHTML.includes('/') && !inputSoFarSelector.innerHTML.includes('+') && !inputSoFarSelector.innerHTML.includes('-')){  
-                // inputSoFarSelector.innerHTML += ' ' + input.value;
                 secondNum = +input.value;
                 input.value = (firstNum * secondNum);
+                shortenNum()
                 return;
             }
             else if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && inputSoFarSelector.innerHTML.includes('*')){
                 secondNum = +input.value;
                 input.value = (firstNum * secondNum);
+                shortenNum()
                 return
             }else{
                 return
@@ -124,6 +142,8 @@ function Multiply(){
         inputSoFarSelector.innerHTML += ' ' + input.value;
         secondNum = +input.value;
         input.value = (firstNum * secondNum);
+        shortenNum()
+        return input.value.length > 9 ? input.value.pop() : input.value 
     }, false)
 }
 function Subtract(){
@@ -142,28 +162,32 @@ function Subtract(){
             if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && !inputSoFarSelector.innerHTML.includes('/') && !inputSoFarSelector.innerHTML.includes('+') && !inputSoFarSelector.innerHTML.includes('-')){
                 secondNum = +input.value;
                 input.value = (firstNum - secondNum);
+                shortenNum()
                 return;
             } else if(inputSoFarSelector.innerHTML.indexOf('-') == 0 && !inputSoFarSelector.innerHTML.includes('/') &&inputSoFarSelector.innerHTML.includes('*')&& inputSoFarSelector.innerHTML.includes('+')){
-                // inputSoFarSelector.innerHTML += ' ' + input.value;
                 secondNum = +input.value;
                 input.value = (firstNum - secondNum)
+                shortenNum()
                 return;
             }
             else if(inputSoFarSelector.innerHTML.includes('-')&& !inputSoFarSelector.innerHTML.includes('/') && !inputSoFarSelector.innerHTML.includes('*') && !inputSoFarSelector.innerHTML.includes('+')){
                 if(!inputSoFarSelector.innerHTML.indexOf('-') ==0 && inputSoFarSelector.innerHTML.indexOf('-', 1)) {
                     inputSoFarSelector.innerHTML += ' ' + input.value;
                     secondNum = +input.value;
-                    input.value = (firstNum - secondNum)
+                    input.value = (firstNum - secondNum);
+                    shortenNum()
                     return
                 }
                 if(inputSoFarSelector.innerHTML.indexOf('-')==0 && inputSoFarSelector.innerHTML.indexOf('-', 1)){
                     secondNum = +input.value;
-                    input.value = (firstNum - secondNum)
+                    input.value = (firstNum - secondNum);
+                    shortenNum()
                     return
                 } 
                 inputSoFarSelector.innerHTML += ' ' + input.value;
                 secondNum = +input.value;
-                input.value = (firstNum - secondNum)
+                input.value = (firstNum - secondNum);
+                shortenNum()
                 return;
             }else {
                 return
@@ -171,7 +195,8 @@ function Subtract(){
         }
         inputSoFarSelector.innerHTML += ' ' + input.value;
         secondNum = +input.value;
-        input.value = (firstNum - secondNum)
+        input.value = (firstNum - secondNum);
+        shortenNum()
     }, false)
 }
 function Add(){
@@ -179,7 +204,7 @@ function Add(){
     let secondNum = '';
     let additionEventListenerFunc = function(){
         inputSoFarSelector.innerHTML = input.value;
-        firstNum = +input.value; //8
+        firstNum = +input.value;
         input.value = ''
         if(!inputSoFarSelector.innerHTML.includes('+')) inputSoFarSelector.innerHTML += ' ' + '+'
         input.value = '';
@@ -191,6 +216,7 @@ function Add(){
                 inputSoFarSelector.innerHTML += ' ' + input.value;
                 secondNum = +input.value;
                 input.value = (firstNum + secondNum);
+                shortenNum();
                 return;
             } else{
                 return;
@@ -198,6 +224,7 @@ function Add(){
         }
         inputSoFarSelector.innerHTML += ' ' + input.value;
         secondNum = +input.value;
-        input.value = (firstNum + secondNum)
+        input.value = (firstNum + secondNum);
+        shortenNum();
     }, false)
 }
